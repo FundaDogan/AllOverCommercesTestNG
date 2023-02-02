@@ -38,7 +38,7 @@ public class Listeners implements ITestListener {
     public void onTestFailure(ITestResult result) {
         System.out.println("onTestFailure - Execute AFTER EACH FAILED @Test : "+result.getName());
         try {
-            allover_commerce.utilities.ReusableMethods.getScreenshot("TEST CASE FAILED :" + result.getName());
+            allovercommerce.utilities.ReusableMethods.getScreenshot("TEST CASE FAILED :" + result.getName());
         } catch (IOException e) {
             e.printStackTrace();
         }

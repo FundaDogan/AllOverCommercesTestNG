@@ -25,7 +25,7 @@ public class ReusableMethods {
         // naming the screenshot with the current date to avoid duplication
         String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         // TakesScreenshot is an interface of selenium that takes the screenshot
-        TakesScreenshot ts = (TakesScreenshot) allover_commerce.utilities.Driver.getDriver();
+        TakesScreenshot ts = (TakesScreenshot) allovercommerce.utilities.Driver.getDriver();
         File source = ts.getScreenshotAs(OutputType.FILE);
         // full path to the screenshot location
         String target = System.getProperty("user.dir") + "/test-output/Screenshots/" +  date + ".png";
@@ -37,19 +37,19 @@ public class ReusableMethods {
 
     //========Switching Window=====//
     public static void switchToWindow(String targetTitle) {
-        String origin = allover_commerce.utilities.Driver.getDriver().getWindowHandle();
-        for (String handle : allover_commerce.utilities.Driver.getDriver().getWindowHandles()) {
-            allover_commerce.utilities.Driver.getDriver().switchTo().window(handle);
-            if (allover_commerce.utilities.Driver.getDriver().getTitle().equals(targetTitle)) {
+        String origin = allovercommerce.utilities.Driver.getDriver().getWindowHandle();
+        for (String handle : allovercommerce.utilities.Driver.getDriver().getWindowHandles()) {
+            allovercommerce.utilities.Driver.getDriver().switchTo().window(handle);
+            if (allovercommerce.utilities.Driver.getDriver().getTitle().equals(targetTitle)) {
                 return;
             }
         }
-        allover_commerce.utilities.Driver.getDriver().switchTo().window(origin);
+        allovercommerce.utilities.Driver.getDriver().switchTo().window(origin);
     }
 
     //========Hover Over=====//
     public static void hover(WebElement element) {
-        Actions actions = new Actions(allover_commerce.utilities.Driver.getDriver());
+        Actions actions = new Actions(allovercommerce.utilities.Driver.getDriver());
         actions.moveToElement(element).perform();
     }
 
@@ -66,7 +66,7 @@ public class ReusableMethods {
 
     //========Returns the Text of the element given an element locator==//
     public static List<String> getElementsText(By locator) {
-        List<WebElement> elems = allover_commerce.utilities.Driver.getDriver().findElements(locator);
+        List<WebElement> elems = allovercommerce.utilities.Driver.getDriver().findElements(locator);
         List<String> elemTexts = new ArrayList<>();
         for (WebElement el : elems) {
             if (!el.getText().isEmpty()) {
@@ -88,22 +88,22 @@ public class ReusableMethods {
 
     //===============Explicit Wait==============//
     public static WebElement waitForVisibility(WebElement element, int timeout) {
-        WebDriverWait wait = new WebDriverWait(allover_commerce.utilities.Driver.getDriver(), Duration.ofSeconds(timeout));
+        WebDriverWait wait = new WebDriverWait(allovercommerce.utilities.Driver.getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public static WebElement waitForVisibility(By locator, int timeout) {
-        WebDriverWait wait = new WebDriverWait(allover_commerce.utilities.Driver.getDriver(), Duration.ofSeconds(timeout));
+        WebDriverWait wait = new WebDriverWait(allovercommerce.utilities.Driver.getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public static WebElement waitForClickability(WebElement element, int timeout) {
-        WebDriverWait wait = new WebDriverWait(allover_commerce.utilities.Driver.getDriver(), Duration.ofSeconds(timeout));
+        WebDriverWait wait = new WebDriverWait(allovercommerce.utilities.Driver.getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public static WebElement waitForClickability(By locator, int timeout) {
-        WebDriverWait wait = new WebDriverWait(allover_commerce.utilities.Driver.getDriver(), Duration.ofSeconds(timeout));
+        WebDriverWait wait = new WebDriverWait(allovercommerce.utilities.Driver.getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
@@ -126,7 +126,7 @@ public class ReusableMethods {
         };
         try {
             System.out.println("Waiting for page to load...");
-            WebDriverWait wait = new WebDriverWait(allover_commerce.utilities.Driver.getDriver(), Duration.ofSeconds(timeout));
+            WebDriverWait wait = new WebDriverWait(allovercommerce.utilities.Driver.getDriver(), Duration.ofSeconds(timeout));
             wait.until(expectation);
         } catch (Throwable error) {
             System.out.println(
@@ -137,7 +137,7 @@ public class ReusableMethods {
     //======Fluent Wait====//
     public static WebElement fluentWait(final WebElement webElement, int timeout) {
         //FluentWait<WebDriver> wait = new FluentWait<WebDriver>(Driver.getDriver()).withTimeout(timeinsec, TimeUnit.SECONDS).pollingEvery(timeinsec, TimeUnit.SECONDS);
-        FluentWait<WebDriver> wait = new FluentWait<WebDriver>(allover_commerce.utilities.Driver.getDriver())
+        FluentWait<WebDriver> wait = new FluentWait<WebDriver>(allovercommerce.utilities.Driver.getDriver())
                 .withTimeout(Duration.ofSeconds(3))//Wait 3 second each time
                 .pollingEvery(Duration.ofSeconds(1))////Check for the element every 1 second
                 .ignoring(NoSuchMethodException.class);
@@ -154,7 +154,7 @@ public class ReusableMethods {
      * @param element
      */
     public static void doubleClick(WebElement element) {
-        new Actions(allover_commerce.utilities.Driver.getDriver()).doubleClick(element).build().perform();
+        new Actions(allovercommerce.utilities.Driver.getDriver()).doubleClick(element).build().perform();
     }
     /**
      * @param element
@@ -196,7 +196,7 @@ public class ReusableMethods {
 
     public static void verifyElementDisplayed(By by) {
         try {
-            assertTrue("Element not visible: " + by, allover_commerce.utilities.Driver.getDriver().findElement(by).isDisplayed());
+            assertTrue("Element not visible: " + by, allovercommerce.utilities.Driver.getDriver().findElement(by).isDisplayed());
         } catch (NoSuchElementException e) {
             Assert.fail("Element not found: " + by);
         }
@@ -210,7 +210,7 @@ public class ReusableMethods {
      */
     public static void verifyElementNotDisplayed(By by) {
         try {
-            assertFalse("Element should not be visible: " + by, allover_commerce.utilities.Driver.getDriver().findElement(by).isDisplayed());
+            assertFalse("Element should not be visible: " + by, allovercommerce.utilities.Driver.getDriver().findElement(by).isDisplayed());
         } catch (NoSuchElementException e) {
             e.printStackTrace();
         }
