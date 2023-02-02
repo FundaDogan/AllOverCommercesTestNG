@@ -4,7 +4,7 @@
     <test name="Smoke Test"   >
         <packages>
             <!-- THIS PATH IS NOT COMPLETE YET. PLEASE COMPLETE BEFORE RUN!-->
-            <package name="allover_commerce.tests.smoketests." />
+            <package name="allover_commerce.tests.smoketests" />
         </packages>
     </test>
 </suite>
