@@ -1,4 +1,4 @@
-package allovercommerce.tests.US_19;
+package allovercommerce.tests.us19;
 
 import allovercommerce.pages.*;
 import allovercommerce.utilities.JSUtils;
