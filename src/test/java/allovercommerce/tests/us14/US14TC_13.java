@@ -7,24 +7,22 @@ import allovercommerce.pages.VendorMyAccountPageUS_12;
 import allovercommerce.utilities.ConfigReader;
 import allovercommerce.utilities.Driver;
 import allovercommerce.utilities.JSUtils;
+import allovercommerce.utilities.ReusableMethods;
+import com.github.javafaker.Faker;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-public class US14TC_01 {
+public class US14TC_13 {
 
     //  US_14 "User should be able to see the options to add items as a Vendor #1.
     //        (My Account > Store Manager > Product > Add New)"
 
-    // Acceptance Criteria : There should be Simple Product, Variable Product, Grouped Product, External - Affiliate Product options.
+    // Acceptance Criteria : Vendor should be able to add New Product brands.
 
-    //  TC_01 - All the dropdown options (Simple Product, Variable Product, Grouped Product, External - Affiliate Product options)should be selectable.
+    //  TC_13 - Vendor should be able to add New Product brands.
 
     /*
     Given User should navigate to Allover Commerce url
@@ -33,17 +31,22 @@ public class US14TC_01 {
     And Enter password into password box
     And Click on sign in button
     And Click on user icon to navigate My Account page
-    And Click on Store Manager to navigate to store manager url
+    And Vendor should navigate to store manager url
     And Click on Products option
-    And Click on Add New option
-    Then Verify Simple Product, Variable Product, Grouped Product, External - Affiliate Product options are available
+    And Click on Add New button
+    And Click on +Add new Product brands option
+    And Enter a new brand name
+    And Click on add
+    Then Verify that new brand is created in the Product brands section
      */
+
     HomePageUS_12 homePageUS_12 = new HomePageUS_12();
     LoginPageUS_12 loginPageUS_12 = new LoginPageUS_12();
 
     VendorMyAccountPageUS_12 vendorMyAccountPageUS_12 = new VendorMyAccountPageUS_12();
 
     StoreManagerPageUS_14 storeManagerPageUS_14 = new StoreManagerPageUS_14();
+
     public void login() {
         //    User should navigate to Allover Commerce url https://allovercommerce.com/
         Driver.getDriver().get(ConfigReader.getProperty("app_home_url"));
@@ -62,7 +65,7 @@ public class US14TC_01 {
     }
 
     @Test
-    public void TC_01() {
+    public void TC_13() {
 
         login();
 
@@ -78,24 +81,32 @@ public class US14TC_01 {
         //  Click on Add New option
         JSUtils.clickElementByJS(storeManagerPageUS_14.addNewButton);
 
-        //  Verify Simple Product, Variable Product, Grouped Product, External - Affiliate Product options are available
-        Select select = new Select(storeManagerPageUS_14.productTypeDropdown);
-        List<WebElement> allOptions = select.getOptions();
-        List<String> optionsNames =new ArrayList<>(Arrays.asList("Simple Product", "Variable Product", "Grouped Product", "External/Affiliate Product"));
-        boolean isAllOptionsExist=false;
-        int idx = 0;
-        for (WebElement eachOption : allOptions){
-            if (eachOption.getText().equals(optionsNames.get(idx))){
-                isAllOptionsExist=true;
-                idx++;
+        //  Click on +Add new Product brands option
+        JSUtils.clickElementByJS(storeManagerPageUS_14.addNewProductBrandsButton);
+
+        //  Enter a new brand name
+        Faker faker = new Faker();
+        String newBrandName = faker.name().name();
+        storeManagerPageUS_14.brandNameInput.sendKeys(newBrandName);
+
+        //  Click on add
+        JSUtils.clickElementByJS(storeManagerPageUS_14.addBrandNameButton);
+
+        //  Verify that new brand is created in the Product brands section
+        ReusableMethods.waitFor(2);
+        //System.out.println(storeManagerPageUS_14.allBrandNames.get(0).getText());
+
+        for(WebElement eachBrand : storeManagerPageUS_14.allBrandNames){
+            if(eachBrand.getText().contains(newBrandName)){
+                Assert.assertTrue(storeManagerPageUS_14.allBrandNames.get(0).getText().contains(newBrandName));
             }
         }
-        Assert.assertTrue(isAllOptionsExist);
-
 
     }
+
     @AfterMethod
     public void tearDown(){
         Driver.closeDriver();
     }
+
 }

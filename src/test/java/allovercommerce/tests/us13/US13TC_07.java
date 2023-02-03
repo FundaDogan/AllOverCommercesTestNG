@@ -14,13 +14,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class US13TC_01 {
+public class US13TC_07 {
 
     // US_13 : "Vendor should be able to add Shipping Address. (My Account > Addresses > Shipping Address)"
 
     // Acceptance Criteria : Vendor should enter First name, Last name, Country/Region, Street address, Town / City, State, ZIP Code.
 
-    // TC_01 : Vendor should enter First name, Last name, Country/Region, Street address, Town / City, State, ZIP Code.
+    // TC_07 : After saving shipping address with valid credentials, vendor should be able to see editing shipping address option
 
     /*
     Given User should navigate to Allover Commerce url
@@ -39,16 +39,17 @@ public class US13TC_01 {
     And Enter a state into State box
     And Enter a Zip Code into ZipCode box
     And Click on save address button
-    Then Verify data has been entered in all required blank fields
+    And Verify Edit Your Shipping Address Option is  clickable
      */
 
     HomePageUS_12 homePageUS_12 = new HomePageUS_12();
     LoginPageUS_12 loginPageUS_12 = new LoginPageUS_12();
     VendorMyAccountPageUS_12 vendorMyAccountPageUS_12 = new VendorMyAccountPageUS_12();
+
     @DataProvider
-    public Object[][] vendorData(){
+    public Object[][] vendorData() {
         //  TEST DATA
-        Object [][] vendorCredentials = {
+        Object[][] vendorCredentials = {
 
                 {"Laura", "Brown", "100 William F Bell Street", "Richmond Hill", "L4S 0K1"},
         };
@@ -73,7 +74,7 @@ public class US13TC_01 {
     }
 
     @Test(dataProvider = "vendorData")
-    public void TC_01(String firstname, String lastname, String street, String city, String zipcode) {
+    public void TC_07(String firstname, String lastname, String street, String city, String zipcode) {
 
         login();
 
@@ -118,16 +119,20 @@ public class US13TC_01 {
         ReusableMethods.waitFor(2);
         JSUtils.clickElementByJS(vendorMyAccountPageUS_12.saveAddressButton);
 
-        //    Then Verify data has been entered in all required blank fields
-        for(WebElement eachShippingAddressTableElement : vendorMyAccountPageUS_12.allShippingAddressTableElements){
-            ReusableMethods.waitFor(1);
-            Assert.assertTrue(eachShippingAddressTableElement.isDisplayed());
-        }
+        //    Verify Edit Your Shipping Address Option is displayed
+        Assert.assertTrue(vendorMyAccountPageUS_12.addShippingAddressButton.isDisplayed());
+
+        //    Click on edit your shipping address button
+        JSUtils.clickElementByJS(vendorMyAccountPageUS_12.addShippingAddressButton);
+
+        //    Verify edit your shipping address button is clickable
+        Assert.assertTrue(Driver.getDriver().getCurrentUrl().contains("edit-address"));
+
     }
+
     @AfterMethod
     public void tearDown(){
         Driver.closeDriver();
     }
-
 
 }
