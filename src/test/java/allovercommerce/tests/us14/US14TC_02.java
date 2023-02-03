@@ -13,18 +13,16 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class US14TC_01 {
+public class US14TC_02 {
 
-    //  US_14 "User should be able to see the options to add items as a Vendor #1.
+//  US_14 "User should be able to see the options to add items as a Vendor #1.
     //        (My Account > Store Manager > Product > Add New)"
 
     // Acceptance Criteria : There should be Simple Product, Variable Product, Grouped Product, External - Affiliate Product options.
 
-    //  TC_01 - All the dropdown options (Simple Product, Variable Product, Grouped Product, External - Affiliate Product options)should be selectable.
+    //  TC_02 - All the dropdown options (Simple Product, Variable Product, Grouped Product, External - Affiliate Product options)should be selectable.
 
     /*
     Given User should navigate to Allover Commerce url
@@ -36,14 +34,16 @@ public class US14TC_01 {
     And Click on Store Manager to navigate to store manager url
     And Click on Products option
     And Click on Add New option
-    Then Verify Simple Product, Variable Product, Grouped Product, External - Affiliate Product options are available
+    Then Verify Simple Product, Variable Product, Grouped Product, External - Affiliate Product options are clickable
      */
+
     HomePageUS_12 homePageUS_12 = new HomePageUS_12();
     LoginPageUS_12 loginPageUS_12 = new LoginPageUS_12();
 
     VendorMyAccountPageUS_12 vendorMyAccountPageUS_12 = new VendorMyAccountPageUS_12();
 
     StoreManagerPageUS_14 storeManagerPageUS_14 = new StoreManagerPageUS_14();
+
     public void login() {
         //    User should navigate to Allover Commerce url https://allovercommerce.com/
         Driver.getDriver().get(ConfigReader.getProperty("app_home_url"));
@@ -62,7 +62,7 @@ public class US14TC_01 {
     }
 
     @Test
-    public void TC_01() {
+    public void TC_02() {
 
         login();
 
@@ -78,22 +78,23 @@ public class US14TC_01 {
         //  Click on Add New option
         JSUtils.clickElementByJS(storeManagerPageUS_14.addNewButton);
 
-        //  Verify Simple Product, Variable Product, Grouped Product, External - Affiliate Product options are available
+        //  Verify Simple Product, Variable Product, Grouped Product, External - Affiliate Product options are clickable
         Select select = new Select(storeManagerPageUS_14.productTypeDropdown);
         List<WebElement> allOptions = select.getOptions();
-        List<String> optionsNames =new ArrayList<>(Arrays.asList("Simple Product", "Variable Product", "Grouped Product", "External/Affiliate Product"));
-        boolean isAllOptionsExist=false;
-        int idx = 0;
+
+        boolean isEachOptionSelected = false;
+        int idx1 = 0;
         for (WebElement eachOption : allOptions){
-            if (eachOption.getText().equals(optionsNames.get(idx))){
-                isAllOptionsExist=true;
-                idx++;
+            select.selectByIndex(idx1);
+            if(eachOption.isSelected()){
+                isEachOptionSelected=true;
+                idx1++;
             }
         }
-        Assert.assertTrue(isAllOptionsExist);
-
+        Assert.assertTrue(isEachOptionSelected);
 
     }
+
     @AfterMethod
     public void tearDown(){
         Driver.closeDriver();

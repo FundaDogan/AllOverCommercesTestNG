@@ -7,24 +7,21 @@ import allovercommerce.pages.VendorMyAccountPageUS_12;
 import allovercommerce.utilities.ConfigReader;
 import allovercommerce.utilities.Driver;
 import allovercommerce.utilities.JSUtils;
+import allovercommerce.utilities.ReusableMethods;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-public class US14TC_01 {
+public class US14TC_03 {
 
     //  US_14 "User should be able to see the options to add items as a Vendor #1.
     //        (My Account > Store Manager > Product > Add New)"
 
     // Acceptance Criteria : There should be Simple Product, Variable Product, Grouped Product, External - Affiliate Product options.
 
-    //  TC_01 - All the dropdown options (Simple Product, Variable Product, Grouped Product, External - Affiliate Product options)should be selectable.
+    //  TC_03 - Dropdown menu should be collapsed, when user click  outside  the dropdown.
 
     /*
     Given User should navigate to Allover Commerce url
@@ -36,14 +33,18 @@ public class US14TC_01 {
     And Click on Store Manager to navigate to store manager url
     And Click on Products option
     And Click on Add New option
-    Then Verify Simple Product, Variable Product, Grouped Product, External - Affiliate Product options are available
+    And Click on dropdown to see all dropdown options
+    And Click on a space field to collapse dropdown menu
+    Then Verify dropdown menu has collapsed
      */
+
     HomePageUS_12 homePageUS_12 = new HomePageUS_12();
     LoginPageUS_12 loginPageUS_12 = new LoginPageUS_12();
 
     VendorMyAccountPageUS_12 vendorMyAccountPageUS_12 = new VendorMyAccountPageUS_12();
 
     StoreManagerPageUS_14 storeManagerPageUS_14 = new StoreManagerPageUS_14();
+
     public void login() {
         //    User should navigate to Allover Commerce url https://allovercommerce.com/
         Driver.getDriver().get(ConfigReader.getProperty("app_home_url"));
@@ -62,7 +63,7 @@ public class US14TC_01 {
     }
 
     @Test
-    public void TC_01() {
+    public void TC_03() {
 
         login();
 
@@ -78,24 +79,22 @@ public class US14TC_01 {
         //  Click on Add New option
         JSUtils.clickElementByJS(storeManagerPageUS_14.addNewButton);
 
-        //  Verify Simple Product, Variable Product, Grouped Product, External - Affiliate Product options are available
+        //   Click on dropdown to see all dropdown options
+        JSUtils.clickElementByJS(storeManagerPageUS_14.productTypeDropdown);
+
+        //  Click on a space field to collapse dropdown menu
+        JSUtils.clickElementByJS(storeManagerPageUS_14.spaceField);
+
+        //  Verify dropdown menu has collapsed
+        ReusableMethods.waitFor(2);
         Select select = new Select(storeManagerPageUS_14.productTypeDropdown);
-        List<WebElement> allOptions = select.getOptions();
-        List<String> optionsNames =new ArrayList<>(Arrays.asList("Simple Product", "Variable Product", "Grouped Product", "External/Affiliate Product"));
-        boolean isAllOptionsExist=false;
-        int idx = 0;
-        for (WebElement eachOption : allOptions){
-            if (eachOption.getText().equals(optionsNames.get(idx))){
-                isAllOptionsExist=true;
-                idx++;
-            }
-        }
-        Assert.assertTrue(isAllOptionsExist);
+        Assert.assertFalse(select.getFirstSelectedOption().getText().equals("Variable Product"));
 
 
     }
+
     @AfterMethod
     public void tearDown(){
-        Driver.closeDriver();
+        //Driver.closeDriver();
     }
 }
