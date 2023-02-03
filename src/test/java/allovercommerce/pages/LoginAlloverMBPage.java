@@ -24,13 +24,14 @@ public class LoginAlloverMBPage {
     @FindBy(id = "password")
     public WebElement ppassword;
 
-    @FindBy(xpath = "(//button[@type='submit'])[1]")
+    @FindBy(xpath = " //*[@id='signin']/form/button")
     public WebElement ssignInSubmitBut;
 
     @FindBy(linkText ="Sign Out")
     public WebElement signOutBut;
 
-
+//    @FindBy(xpath = "(//button[@type='submit'])[1]")
+//    public WebElement ssignInSubmitBut;
 
 
 

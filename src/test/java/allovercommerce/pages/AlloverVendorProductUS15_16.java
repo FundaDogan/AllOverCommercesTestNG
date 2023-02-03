@@ -82,8 +82,10 @@ public class AlloverVendorProductUS15_16 {
 
     //    @FindBy(className= "wcfmfafa-arrow-alt-circle-right block-indicator")
 //    public WebElement attributesButton;
-    @FindBy(id = "wcfm_products_manage_form_attribute_head")
+    @FindBy(xpath = " //*[@id='wcfm_products_manage_form_attribute_head']")
     public WebElement attributesButton;
+
+    //*[@id="wcfm_products_manage_form_attribute_head"]
 
     @FindBy(xpath = "//*[@id='attributes_is_active_1']")
     public WebElement colorCheckbox;
@@ -236,7 +238,7 @@ public class AlloverVendorProductUS15_16 {
 
      //Mustafa US_16_TC_03=============================================================================================================
 
-    //Mustafa US_16_14_TC_01=============================================================================================================
+    //Mustafa US_16_14_TC_04=============================================================================================================
 
     @FindBy(xpath = "//*[@id='insert-media-button']")
     public WebElement  addMediaUnderShortDescription;

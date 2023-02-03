@@ -35,8 +35,8 @@ public class US15TC_07 {
         Driver.getDriver().get(ConfigReader.getProperty("app_home_url"));
         loginAlloverMBPage.ssingInBut.click();
 
-        loginAlloverMBPage.uusername.sendKeys(ConfigReader.getProperty("app_vendor_valid_email"));
-        loginAlloverMBPage.ppassword.sendKeys(ConfigReader.getProperty("app_vendor_valid_password"));
+        loginAlloverMBPage.uusername.sendKeys(ConfigReader.getProperty("email_MB"));
+        loginAlloverMBPage.ppassword.sendKeys(ConfigReader.getProperty("Password_MB"));
 
         loginAlloverMBPage.ssignInSubmitBut.click();
 
