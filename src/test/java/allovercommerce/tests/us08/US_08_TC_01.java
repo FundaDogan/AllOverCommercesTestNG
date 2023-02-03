@@ -1,4 +1,4 @@
 package allovercommerce.tests.us08;
 
-public class US08TC_01 {
+public class US_08_TC_01 {
 }
