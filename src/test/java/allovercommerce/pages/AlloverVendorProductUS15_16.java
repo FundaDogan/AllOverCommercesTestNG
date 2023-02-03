@@ -275,22 +275,38 @@ public class AlloverVendorProductUS15_16 {
 
 
 
-
-
-
-
-
-
-
-    //*[@id="pro_title"]
-
-
-
-
-
-
-
     //Mustafa US_16_14_TC_03=============================================================================================================
+    //Mustafa US_16_14_TC_05=============================================================================================================
+
+    @FindBy(xpath = "//*[@id='wcfm_products_manage_form_general_expander']/div[2]/div[5]/p")
+    public WebElement  addNewCategory;
+
+    @FindBy(id = "wcfm_new_cat")
+    public WebElement categoryName;
+
+    @FindBy(xpath = "//select[@class='wcfm-select wcfm_new_parent_taxt_ele wcfm_full_ele']")
+    public WebElement categoryDropDown;
+
+
+    //Mustafa US_16_14_TC_05=============================================================================================================
+
+    //Mustafa US_16_14_TC_06=============================================================================================================
+
+    @FindBy(xpath = "//*[@id='product_cats_checklist']/li[1]/input")
+    public WebElement categoriesCheckbox;
+
+// div[class="wcfm_product_manager_cats_checklist_fields"]>:nth-child(3)
+
+    //*[@id="product_cats_checklist"]/li[1]
+
+
+
+
+
+    //Mustafa US_16_14_TC_06=============================================================================================================
+
+
+
 
 
 }

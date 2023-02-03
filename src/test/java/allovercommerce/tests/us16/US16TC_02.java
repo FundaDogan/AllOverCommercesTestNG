@@ -34,8 +34,8 @@ public class US16TC_02 {
         Driver.getDriver().get(ConfigReader.getProperty("app_home_url"));
         loginAlloverMBPage.ssingInBut.click();
 
-        loginAlloverMBPage.uusername.sendKeys(ConfigReader.getProperty("user_name"));
-        loginAlloverMBPage.ppassword.sendKeys(ConfigReader.getProperty("password_fathermountain"));
+        loginAlloverMBPage.uusername.sendKeys(ConfigReader.getProperty("app_vendor_valid_email"));
+        loginAlloverMBPage.ppassword.sendKeys(ConfigReader.getProperty("app_vendor_valid_password"));
 
         loginAlloverMBPage.ssignInSubmitBut.click();
 

@@ -4,26 +4,14 @@ import allovercommerce.pages.AlloverVendorProductUS15_16;
 import allovercommerce.pages.LoginAlloverMBPage;
 import allovercommerce.utilities.ConfigReader;
 import allovercommerce.utilities.Driver;
+import allovercommerce.utilities.JSUtils;
+import allovercommerce.utilities.ReusableMethods;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
-public class US16TC_03 {
-
-     /*
-    Given User should navigate to Allover Commerce url https://allovercommerce.com/
-    When Click on sign in button
-    And enter username into username field
-    And enter password into password field
-    And click on sign in button
-    And click on user icon
-    And click on "Store Manager" on menu
-    And click on "products" on opened menu
-    And click on "add new" button
-    And add price into "Piece($)" field
-    And add price into "Sale Price($)" field
-
-      */
+public class US1614TC_05 {
 
     AlloverVendorProductUS15_16 alloverVendorProductUS15_16 = new AlloverVendorProductUS15_16();
     LoginAlloverMBPage loginAlloverMBPage = new LoginAlloverMBPage();
@@ -52,9 +40,26 @@ public class US16TC_03 {
 
         alloverVendorProductUS15_16.addNewButton1.click();
 
+        JSUtils.clickElementByJS(alloverVendorProductUS15_16.addNewCategory);
 
-        alloverVendorProductUS15_16.priceInput.sendKeys("90");
-        alloverVendorProductUS15_16.salePriceInput.sendKeys("150");
+        alloverVendorProductUS15_16.categoryName.sendKeys("Tools");
+
+        ReusableMethods.waitFor(1);
+        Select select = new Select(alloverVendorProductUS15_16.categoryDropDown );
+        ReusableMethods.waitFor(1);
+        select.selectByIndex(16);
+        ReusableMethods.waitFor(1);
+
+
+
+
+
+
+
+
+
+
+
 
     }
-    }
+}
