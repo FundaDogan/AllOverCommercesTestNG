@@ -1,9 +1,9 @@
-package allovercommerce.tests.US_20;
+package allovercommerce.tests.us20;
 
 import allovercommerce.pages.HomePageUS19_20;
 import allovercommerce.pages.StoreManagerPageUS19_20;
 import allovercommerce.pages.VendorMyAccountPageUS19_20;
-import allovercommerce.tests.US_19.US_19_TC_02;
+import allovercommerce.tests.us19.US_19_TC_02;
 import allovercommerce.utilities.JSUtils;
 import allovercommerce.utilities.ReusableMethods;
 import com.github.javafaker.Faker;
