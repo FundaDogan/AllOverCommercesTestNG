@@ -4,15 +4,12 @@ import allovercommerce.pages.AlloverVendorProductUS15_16;
 import allovercommerce.pages.LoginAlloverMBPage;
 import allovercommerce.utilities.ConfigReader;
 import allovercommerce.utilities.Driver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
-import java.util.List;
+public class US16TC_03 {
 
-public class US16TC_01 {
      /*
     Given User should navigate to Allover Commerce url https://allovercommerce.com/
     When Click on sign in button
@@ -23,11 +20,10 @@ public class US16TC_01 {
     And click on "Store Manager" on menu
     And click on "products" on opened menu
     And click on "add new" button
-    And select "Simple Product" from the Dropdown menu
-    Then verify than  simple product is default or not.
+    And add price into "Piece($)" field
+    And add price into "Sale Price($)" field
 
       */
-
 
     AlloverVendorProductUS15_16 alloverVendorProductUS15_16 = new AlloverVendorProductUS15_16();
     LoginAlloverMBPage loginAlloverMBPage = new LoginAlloverMBPage();
@@ -57,31 +53,8 @@ public class US16TC_01 {
         alloverVendorProductUS15_16.addNewButton1.click();
 
 
-        WebElement dropdown = alloverVendorProductUS15_16.productTypesDropdown;
-        Select select = new Select(dropdown);
-
-        List<WebElement> allOptions = select.getOptions();
-
-
-//      Verify the dropdown has Option 2 text
-        boolean isOption0Exist = false;
-        for (WebElement eachOption : allOptions) {
-            if (eachOption.getText().equals("Simple Product")) {
-                isOption0Exist = true;
-                System.out.println(eachOption.getText());
-
-            }
-
-        }
+        alloverVendorProductUS15_16.priceInput.sendKeys("90");
+        alloverVendorProductUS15_16.salePriceInput.sendKeys("150");
 
     }
-
-}
-
-
-
-
-
-
- 
-
+    }

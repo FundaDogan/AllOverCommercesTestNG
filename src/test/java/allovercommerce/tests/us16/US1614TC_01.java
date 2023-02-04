@@ -10,30 +10,17 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
+import java.awt.*;
 import java.util.List;
 
-public class US16TC_01 {
-     /*
-    Given User should navigate to Allover Commerce url https://allovercommerce.com/
-    When Click on sign in button
-    And enter username into username field
-    And enter password into password field
-    And click on sign in button
-    And click on user icon
-    And click on "Store Manager" on menu
-    And click on "products" on opened menu
-    And click on "add new" button
-    And select "Simple Product" from the Dropdown menu
-    Then verify than  simple product is default or not.
-
-      */
-
+public class US1614TC_01 {
 
     AlloverVendorProductUS15_16 alloverVendorProductUS15_16 = new AlloverVendorProductUS15_16();
     LoginAlloverMBPage loginAlloverMBPage = new LoginAlloverMBPage();
 
     @BeforeClass
     public void test() {
+
         Driver.getDriver().get(ConfigReader.getProperty("app_home_url"));
         loginAlloverMBPage.ssingInBut.click();
 
@@ -43,11 +30,12 @@ public class US16TC_01 {
         loginAlloverMBPage.ssignInSubmitBut.click();
 
         loginAlloverMBPage.signOutBut.click();
+
     }
 
     @Test
 
-    public void test1() {
+    public void test1() throws AWTException {
 
 
         alloverVendorProductUS15_16.storeMenagerButton.click();
@@ -56,32 +44,52 @@ public class US16TC_01 {
 
         alloverVendorProductUS15_16.addNewButton1.click();
 
-
         WebElement dropdown = alloverVendorProductUS15_16.productTypesDropdown;
         Select select = new Select(dropdown);
 
         List<WebElement> allOptions = select.getOptions();
+        int counter=0;
 
-
-//      Verify the dropdown has Option 2 text
-        boolean isOption0Exist = false;
+        boolean isOptionExist = false;
         for (WebElement eachOption : allOptions) {
-            if (eachOption.getText().equals("Simple Product")) {
-                isOption0Exist = true;
+            if (eachOption.getText().contains("Simple Product")
+                    || eachOption.getText().contains("Variable Product")
+                    || eachOption.getText().contains("Grouped Product")
+                    || eachOption.getText().contains("External/Affiliate Product")) {
+                isOptionExist = true;
+
+                counter++;
+
                 System.out.println(eachOption.getText());
+
+
 
             }
 
         }
+      //  System.out.println(counter);
 
     }
 
-}
+    }
 
 
 
 
 
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

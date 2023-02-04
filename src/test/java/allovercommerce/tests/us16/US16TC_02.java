@@ -4,16 +4,14 @@ import allovercommerce.pages.AlloverVendorProductUS15_16;
 import allovercommerce.pages.LoginAlloverMBPage;
 import allovercommerce.utilities.ConfigReader;
 import allovercommerce.utilities.Driver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
+import allovercommerce.utilities.ReusableMethods;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
-import java.util.List;
+public class US16TC_02 {
 
-public class US16TC_01 {
-     /*
+    /*
     Given User should navigate to Allover Commerce url https://allovercommerce.com/
     When Click on sign in button
     And enter username into username field
@@ -23,11 +21,10 @@ public class US16TC_01 {
     And click on "Store Manager" on menu
     And click on "products" on opened menu
     And click on "add new" button
-    And select "Simple Product" from the Dropdown menu
-    Then verify than  simple product is default or not.
+    And click Virtual checkbox
+    And user clicksDownloadable checkbox
 
-      */
-
+     */
 
     AlloverVendorProductUS15_16 alloverVendorProductUS15_16 = new AlloverVendorProductUS15_16();
     LoginAlloverMBPage loginAlloverMBPage = new LoginAlloverMBPage();
@@ -57,31 +54,18 @@ public class US16TC_01 {
         alloverVendorProductUS15_16.addNewButton1.click();
 
 
-        WebElement dropdown = alloverVendorProductUS15_16.productTypesDropdown;
-        Select select = new Select(dropdown);
 
-        List<WebElement> allOptions = select.getOptions();
+        alloverVendorProductUS15_16.virtualCheckbox.click();
+        ReusableMethods.waitFor(1);
+        alloverVendorProductUS15_16.downloadableCheckbox.click();
+        ReusableMethods.waitFor(1);
+        alloverVendorProductUS15_16.virtualCheckbox.click();
+        ReusableMethods.waitFor(1);
+        alloverVendorProductUS15_16.downloadableCheckbox.click();
+        ReusableMethods.waitFor(1);
 
 
-//      Verify the dropdown has Option 2 text
-        boolean isOption0Exist = false;
-        for (WebElement eachOption : allOptions) {
-            if (eachOption.getText().equals("Simple Product")) {
-                isOption0Exist = true;
-                System.out.println(eachOption.getText());
 
-            }
-
-        }
 
     }
-
 }
-
-
-
-
-
-
- 
-
