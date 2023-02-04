@@ -7,24 +7,23 @@ import allovercommerce.pages.VendorMyAccountPageUS_12;
 import allovercommerce.utilities.ConfigReader;
 import allovercommerce.utilities.Driver;
 import allovercommerce.utilities.JSUtils;
+import allovercommerce.utilities.ReusableMethods;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.IOException;
 
-public class US14TC_01 {
+public class US14TC_05 {
 
     //  US_14 "User should be able to see the options to add items as a Vendor #1.
     //        (My Account > Store Manager > Product > Add New)"
 
-    // Acceptance Criteria : There should be Simple Product, Variable Product, Grouped Product, External - Affiliate Product options.
+    // Acceptance Criteria : Vendor should be able to add a gallery product Photo.
 
-    //  TC_01 - All the dropdown options (Simple Product, Variable Product, Grouped Product, External - Affiliate Product options)should be selectable.
+    //  TC_05 - Vendor should be able to add a gallery product Photo.
 
     /*
     Given User should navigate to Allover Commerce url
@@ -33,17 +32,22 @@ public class US14TC_01 {
     And Enter password into password box
     And Click on sign in button
     And Click on user icon to navigate My Account page
-    And Click on Store Manager to navigate to store manager url
-    And Click on Products option
-    And Click on Add New option
-    Then Verify Simple Product, Variable Product, Grouped Product, External - Affiliate Product options are available
+    And	Vendor should navigate to store manager url
+    And	Click on Products option
+    And	Click on Add New button
+    And	Click on gallery image display
+    And	Select an image file from computer
+    And	Click on select button to complete uploading image
+    Then Verify image is displayed on the page
      */
+
     HomePageUS_12 homePageUS_12 = new HomePageUS_12();
     LoginPageUS_12 loginPageUS_12 = new LoginPageUS_12();
 
     VendorMyAccountPageUS_12 vendorMyAccountPageUS_12 = new VendorMyAccountPageUS_12();
 
     StoreManagerPageUS_14 storeManagerPageUS_14 = new StoreManagerPageUS_14();
+
     public void login() {
         //    User should navigate to Allover Commerce url https://allovercommerce.com/
         Driver.getDriver().get(ConfigReader.getProperty("app_home_url"));
@@ -62,7 +66,7 @@ public class US14TC_01 {
     }
 
     @Test
-    public void TC_01() {
+    public void TC_05() throws IOException {
 
         login();
 
@@ -78,22 +82,25 @@ public class US14TC_01 {
         //  Click on Add New option
         JSUtils.clickElementByJS(storeManagerPageUS_14.addNewButton);
 
-        //  Verify Simple Product, Variable Product, Grouped Product, External - Affiliate Product options are available
-        Select select = new Select(storeManagerPageUS_14.productTypeDropdown);
-        List<WebElement> allOptions = select.getOptions();
-        List<String> optionsNames =new ArrayList<>(Arrays.asList("Simple Product", "Variable Product", "Grouped Product", "External/Affiliate Product"));
-        boolean isAllOptionsExist=false;
-        int idx = 0;
-        for (WebElement eachOption : allOptions){
-            if (eachOption.getText().equals(optionsNames.get(idx))){
-                isAllOptionsExist=true;
-                idx++;
-            }
-        }
-        Assert.assertTrue(isAllOptionsExist);
+        //  Click on gallery image display
+        JSUtils.clickElementByJS(storeManagerPageUS_14.addGalleryPhotoIcon);
 
+        //  Select an image file from computer
+        String userHOME=System.getProperty("user.home");
+        String pathOfFile = userHOME + "\\Downloads\\ballimage.jpg";
+        storeManagerPageUS_14.selectFilesButton.sendKeys(pathOfFile);
+
+        //  Click on select button to complete uploading image
+        ReusableMethods.waitFor(3);
+        storeManagerPageUS_14.addToGalleryButton.click();
+
+        // Verify image is displayed on the page
+        ReusableMethods.waitFor(2);
+        ReusableMethods.getScreenshot("screenshot");
+        Assert.assertTrue(storeManagerPageUS_14.removeGalleryImgButton.isDisplayed());
 
     }
+
     @AfterMethod
     public void tearDown(){
         Driver.closeDriver();

@@ -24,10 +24,14 @@ select the "Variable Product'
 US14 and US15 should be done
 Click on "Attributes"
 Verify that the selected color and size attributes are
- displayed on the page after click
+displayed on the page after click
+click on "Color" checkbox on opened menu
+verify that color should be selectable
+click on "Size" checkbox on menu
+verify that size should be selectable
  */
 
-public class US17TC_01 {
+public class US17TC_02 {
     HomePage_17 homePage = new HomePage_17();
     LoginPage_17 loginPage = new LoginPage_17();
 
