@@ -23,12 +23,7 @@ Click on Products option
 Click on Add New option
 Click on "All product type"
 select on "External - Affiliate Product"
-Enter Product Title
-Enter URL
-Enter Button Text
-Enter Button Text
-Enter Price
-Enter Sale Price
+
 
    */
     StoreManagerPageUS_17 storeManagerPageUS_17=new StoreManagerPageUS_17() ;

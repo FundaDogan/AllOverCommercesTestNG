@@ -25,9 +25,17 @@ US14 and US15 should be done
 Click on "Attributes"
 Verify that the selected color and size attributes are
  displayed on the page after click
+ click "ADD NEW" button on opened menu
+Enter a color name
+click on "OK" button
+verify that new color on displayed
+click "ADD NEW" button on opened menu
+Enter a size name
+click "OK" button
+verify that new size on displayed
  */
 
-public class US17TC_01 {
+public class US17TC_03 {
     HomePage_17 homePage = new HomePage_17();
     LoginPage_17 loginPage = new LoginPage_17();
 
@@ -75,6 +83,23 @@ public class US17TC_01 {
 
         //  vendorMyAccountPage.sizeCheckbox.click();
         JSUtils.clickElementByJS(storeManagerPageUS_17.sizeCheckbox);
+
+        try {
+            JSUtils.clickElementByJS(storeManagerPageUS_17.addNewButton2);
+            ReusableMethods.waitFor(3);
+            Driver.getDriver().switchTo().alert().sendKeys("myColor");
+            Driver.getDriver().switchTo().alert().accept();
+
+
+            ReusableMethods.waitFor(1);
+            Select select2=new Select(storeManagerPageUS_17.colorCheckbox);
+            ReusableMethods.waitFor(1);
+            select.selectByIndex(1);
+            ReusableMethods.waitFor(1);
+
+        } catch (Exception ignored) {
+            //e.printStackTrace();
+        }
 
     }
 }

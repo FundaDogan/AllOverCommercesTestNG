@@ -1,4 +1,4 @@
-package allovercommerce.tests.US_19;
+package allovercommerce.tests.us19;
 
 import allovercommerce.pages.HomePageUS19_20;
 import allovercommerce.pages.LoginPageUS19_20;
