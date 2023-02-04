@@ -5,6 +5,7 @@ import allovercommerce.pages.LoginPage_17;
 import allovercommerce.pages.StoreManagerPageUS_17;
 import allovercommerce.utilities.ConfigReader;
 import allovercommerce.utilities.Driver;
+import allovercommerce.utilities.JSUtils;
 import allovercommerce.utilities.ReusableMethods;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.BeforeTest;
@@ -64,6 +65,17 @@ select on "External - Affiliate Product"
         Select select = new Select(storeManagerPageUS_17.productTypeDropdown);
         select.selectByIndex(3);
         ReusableMethods.waitFor(2);
+        //   vendorMyAccountPage.attributesButton.click();
+        JSUtils.clickElementByJS(storeManagerPageUS_17.attributesButton);
+        ReusableMethods.waitFor(6);
+
+        //  vendorMyAccountPage.colorCheckbox.click();
+        JSUtils.clickElementByJS(storeManagerPageUS_17.colorCheckbox);
+
+        //  vendorMyAccountPage.sizeCheckbox.click();
+        JSUtils.clickElementByJS(storeManagerPageUS_17.sizeCheckbox);
+
+
 
     }
 }
